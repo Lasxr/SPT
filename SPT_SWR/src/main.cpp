@@ -6,15 +6,15 @@ Adafruit_TCS34725 tcs =
   Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS,
                     TCS34725_GAIN_4X);
 
-#define MR_IN1 14       // Back Right Motor
-#define MR_IN2 27
-#define MR_IN3 26    // Front Right Motor
-#define MR_IN4 25       
+#define MR_IN1 12       // Back Right Motor
+#define MR_IN2 23
+#define MR_IN3 33    // Front Right Motor
+#define MR_IN4 32       
 
-#define ML_IN1 23    // Front Left Motor
-#define ML_IN2 12
-#define ML_IN3 33   // Back Left Motor
-#define ML_IN4 32
+#define ML_IN1 14    // Front Left Motor
+#define ML_IN2 27
+#define ML_IN3 26   // Back Left Motor
+#define ML_IN4 25
 
 // Motor Driver Pins
 #define BR_ENA 16
@@ -359,6 +359,29 @@ void val_RGB(){
   }
 }
 
+
+void Colour_box(){
+  val_RGB();
+  setServoAngle(0, 90);
+  setServoAngle(1, 90);
+  if (RED = 1)
+  {
+    setServoAngle(0, 180);
+    setServoAngle(1, 90);
+  }else if (YELLOW = 1){
+    setServoAngle(0, 0);
+    setServoAngle(1, 90);
+  }else if (GREEN = 1){
+    setServoAngle(0, 90);
+    setServoAngle(1, 180);
+  }else if (BLUE = 1)
+  {
+    setServoAngle(0, 90);
+    setServoAngle(1, 0);
+  }
+}
+
+
 void To_FrontLine() {
   while (1)
   {
@@ -458,7 +481,6 @@ void Box_Right(){
 void Box_Left(){
   Forward(800);
   StopCar(300);
-  
   while (1)
   {
     val_IR();
@@ -519,8 +541,10 @@ void loop(){
   TurnLeft(600);
 
   Box_Right();
-  Forward(500);
+  Forward(800);
+  Colour_box();
+
+  Backward(800);
 
   End_proses();
 }
-
